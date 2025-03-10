@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -45,224 +45,99 @@ const LoginScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Image
-          source={require('../../../assets/splash-icon.png')}
-          style={styles.logo}
-          resizeMode="contain"
-        />
-        <Text style={styles.title}>Welcome Back!</Text>
-        <Text style={styles.subtitle}>Sign in to continue shopping</Text>
+    <View className="flex-1 bg-white px-8 pt-16">
+      <View className="items-center mt-12 mb-12">
+        <Text className="text-3xl font-bold text-gray-800 mb-3">Welcome Back</Text>
+        <Text className="text-base text-gray-600">Sign in to continue shopping</Text>
       </View>
 
-      <View style={styles.form}>
-        <View style={styles.inputContainer}>
-          <Ionicons name="mail-outline" size={24} color="#666" style={styles.inputIcon} />
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            keyboardType="email-address"
-            autoCapitalize="none"
-            value={email}
-            onChangeText={(text) => {
-              setEmail(text);
-              setEmailError('');
-            }}
-          />
-        </View>
-        {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
-
-        <View style={styles.inputContainer}>
-          <Ionicons name="lock-closed-outline" size={24} color="#666" style={styles.inputIcon} />
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            secureTextEntry={!showPassword}
-            value={password}
-            onChangeText={(text) => {
-              setPassword(text);
-              setPasswordError('');
-            }}
-          />
-          <TouchableOpacity
-            style={styles.showPasswordButton}
-            onPress={() => setShowPassword(!showPassword)}
-          >
-            <Ionicons
-              name={showPassword ? 'eye-off-outline' : 'eye-outline'}
-              size={24}
-              color="#666"
+      <View className="flex-1 space-y-6">
+        <View className="space-y-5">
+          <View className="flex-row items-center border-2 border-gray-200 rounded-xl px-4 py-4 focus-within:border-blue-500">
+            <Ionicons name="mail-outline" size={24} color="#666" />
+            <TextInput
+              className="flex-1 ml-3 text-base text-gray-800"
+              placeholder="Email"
+              placeholderTextColor="#999"
+              keyboardType="email-address"
+              autoCapitalize="none"
+              value={email}
+              onChangeText={(text) => {
+                setEmail(text);
+                setEmailError('');
+              }}
             />
-          </TouchableOpacity>
+          </View>
+          {emailError ? <Text className="text-red-500 text-sm px-1">{emailError}</Text> : null}
+
+          <View className="flex-row items-center border-2 border-gray-200 rounded-xl px-4 py-4 focus-within:border-blue-500">
+            <Ionicons name="lock-closed-outline" size={24} color="#666" />
+            <TextInput
+              className="flex-1 ml-3 text-base text-gray-800"
+              placeholder="Password"
+              placeholderTextColor="#999"
+              secureTextEntry={!showPassword}
+              value={password}
+              onChangeText={(text) => {
+                setPassword(text);
+                setPasswordError('');
+              }}
+            />
+            <TouchableOpacity
+              className="p-2"
+              onPress={() => setShowPassword(!showPassword)}
+            >
+              <Ionicons
+                name={showPassword ? 'eye-off-outline' : 'eye-outline'}
+                size={24}
+                color="#666"
+              />
+            </TouchableOpacity>
+          </View>
+          {passwordError ? <Text className="text-red-500 text-sm px-1">{passwordError}</Text> : null}
         </View>
-        {passwordError ? <Text style={styles.errorText}>{passwordError}</Text> : null}
 
         <TouchableOpacity
-          style={styles.forgotPasswordButton}
+          className="self-end mb-2"
           onPress={() => console.log('Forgot password')}
         >
-          <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+          <Text className="text-blue-500 text-base font-medium">Forgot Password?</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-          <Text style={styles.loginButtonText}>Login</Text>
+        <TouchableOpacity
+          className="bg-blue-500 rounded-xl py-4 shadow-md active:bg-blue-600"
+          onPress={handleLogin}
+        >
+          <Text className="text-white text-lg font-semibold text-center">Login</Text>
         </TouchableOpacity>
 
-        <View style={styles.divider}>
-          <View style={styles.dividerLine} />
-          <Text style={styles.dividerText}>OR</Text>
-          <View style={styles.dividerLine} />
+        <View className="flex-row items-center my-6">
+          <View className="flex-1 h-[1px] bg-gray-200" />
+          <Text className="text-gray-500 mx-4 text-base">OR</Text>
+          <View className="flex-1 h-[1px] bg-gray-200" />
         </View>
 
-        <View style={styles.socialButtons}>
-          <TouchableOpacity style={[styles.socialButton, styles.googleButton]}>
+        <View className="flex-row justify-between space-x-4">
+          <TouchableOpacity className="flex-1 flex-row items-center justify-center py-4 rounded-xl border-2 border-gray-200 active:bg-gray-50">
             <Ionicons name="logo-google" size={24} color="#DB4437" />
-            <Text style={styles.socialButtonText}>Google</Text>
+            <Text className="text-base text-gray-800 ml-3 font-medium">Google</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={[styles.socialButton, styles.facebookButton]}>
+          <TouchableOpacity className="flex-1 flex-row items-center justify-center py-4 rounded-xl border-2 border-gray-200 active:bg-gray-50">
             <Ionicons name="logo-facebook" size={24} color="#4267B2" />
-            <Text style={styles.socialButtonText}>Facebook</Text>
+            <Text className="text-base text-gray-800 ml-3 font-medium">Facebook</Text>
           </TouchableOpacity>
         </View>
 
-        <View style={styles.signupContainer}>
-          <Text style={styles.signupText}>Don't have an account? </Text>
+        <View className="flex-row justify-center items-center mt-6">
+          <Text className="text-base text-gray-600">Don't have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-            <Text style={styles.signupLink}>Sign Up</Text>
+            <Text className="text-base text-blue-500 font-semibold">Sign Up</Text>
           </TouchableOpacity>
         </View>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    padding: 20,
-  },
-  header: {
-    alignItems: 'center',
-    marginTop: 50,
-    marginBottom: 30,
-  },
-  logo: {
-    width: 100,
-    height: 100,
-    marginBottom: 20,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 10,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#666',
-  },
-  form: {
-    flex: 1,
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 8,
-    marginBottom: 15,
-    paddingHorizontal: 15,
-  },
-  inputIcon: {
-    marginRight: 10,
-  },
-  input: {
-    flex: 1,
-    height: 50,
-    fontSize: 16,
-  },
-  showPasswordButton: {
-    padding: 5,
-  },
-  errorText: {
-    color: '#ff3b30',
-    fontSize: 14,
-    marginTop: -10,
-    marginBottom: 15,
-    marginLeft: 5,
-  },
-  forgotPasswordButton: {
-    alignSelf: 'flex-end',
-    marginBottom: 20,
-  },
-  forgotPasswordText: {
-    color: '#007AFF',
-    fontSize: 14,
-  },
-  loginButton: {
-    backgroundColor: '#007AFF',
-    borderRadius: 8,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  loginButtonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  divider: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  dividerLine: {
-    flex: 1,
-    height: 1,
-    backgroundColor: '#ddd',
-  },
-  dividerText: {
-    color: '#666',
-    marginHorizontal: 10,
-  },
-  socialButtons: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 20,
-  },
-  socialButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '48%',
-    height: 50,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#ddd',
-  },
-  socialButtonText: {
-    marginLeft: 10,
-    fontSize: 16,
-    color: '#333',
-  },
-  signupContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  signupText: {
-    fontSize: 16,
-    color: '#666',
-  },
-  signupLink: {
-    fontSize: 16,
-    color: '#007AFF',
-    fontWeight: 'bold',
-  },
-});
 
 export default LoginScreen;
